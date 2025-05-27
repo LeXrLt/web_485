@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         messageArea.innerHTML = '<p>Fetching data...</p>';
         try {
-            const response = await fetch(`https://third-party-api.ti-lian.com/local/v1/getSerialDevice?macAddress=${macAddress}`);
+            const response = await fetch(`https://web485.ti-lian.com/local/v1/getSerialDevice?macAddress=${macAddress}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
