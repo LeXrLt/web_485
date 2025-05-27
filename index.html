@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time API Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>API Data Viewer</h1>
+    <div>
+        <label for="macAddress">Enter MAC Address:</label>
+        <input type="text" id="macAddress" name="macAddress" placeholder="e.g., 5C-53-10-11-11-3A">
+        <button id="fetchButton">Get Data</button>
+    </div>
+    <h2>Messages:</h2>
+    <div id="messageArea">
+        <p>Waiting for data...</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
