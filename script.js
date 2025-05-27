@@ -24,17 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            const data = await response.json(); // Assuming the API returns JSON
+            const responseData = await response.json(); // Renamed to responseData
 
-            // Display the data
-            // This part might need adjustment based on the actual structure of the API response
-            if (data && Object.keys(data).length > 0) {
-                // Let's assume the data object itself is what we want to display
-                // Or specific fields like data.message or data.devices
-                // For now, we'll stringify the whole JSON object for inspection
-                messageArea.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            // Display the data based on new requirements
+            if (responseData && responseData.code === "200" && responseData.data) {
+                const dataMap = {
+                    "2": "安全回路", // Safety Circuit
+                    "4": "检修模式", // Maintenance Mode
+                    "5": "厅门锁"  // Hall Door Lock
+                };
+                let htmlContent = '<ul>';
+                for (const key in responseData.data) {
+                    if (responseData.data.hasOwnProperty(key)) {
+                        const displayName = dataMap[key] || key; // Use mapped name or original key
+                        htmlContent += `<li>${displayName}: ${responseData.data[key]}</li>`;
+                    }
+                }
+                htmlContent += '</ul>';
+                messageArea.innerHTML = htmlContent;
+            } else if (responseData && responseData.msg) {
+                messageArea.innerHTML = `<p style="color: orange;">Info: ${responseData.msg}</p>`;
             } else {
-                messageArea.innerHTML = '<p>No data received or data is empty.</p>';
+                messageArea.innerHTML = '<p>No relevant data received or data format is unexpected.</p>';
             }
         } catch (error) {
             console.error('Error fetching data:', error);
