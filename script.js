@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('savedMacAddress', currentMacAddress);
         updateSerialDevice(currentMacAddress);
         fetchData(currentMacAddress);
-        pollingInterval = setInterval(() => fetchData(currentMacAddress), 5000);
+        pollingInterval = setInterval(() => fetchData(currentMacAddress), 1000);
     });
 
     // Optional: You might want to stop polling if the user clears the input
